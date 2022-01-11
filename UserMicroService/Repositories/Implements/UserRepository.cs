@@ -1,9 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SharedModels;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using UserMicroService.Contexts;
 using UserMicroService.Repositories.Interfaces;
 
@@ -19,9 +16,17 @@ namespace UserMicroService.Repositories.Implements
             _dbSet = _dbContext.Set<TEntity>();
         }
 
-        public void AddOrEdit(TEntity obj)
+
+        public void Insert(TEntity obj)
         {
             _dbSet.Add(obj);
+            Save();
+        }
+
+        public void Update(TEntity obj)
+        {
+            _dbSet.Attach(obj);
+            _dbContext.Entry(obj).State = EntityState.Modified;
         }
 
         public void Delete(object id)
@@ -38,13 +43,16 @@ namespace UserMicroService.Repositories.Implements
         public TEntity GetById(object id)
         {
             return _dbSet.Find(id);
-
         }
+
+
+
 
         public void Save()
         {
             _dbContext.SaveChanges();
         }
+        
     }
 
 }

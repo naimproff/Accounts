@@ -6,7 +6,8 @@ namespace GenericLibrary.GenericInterfaces
     {
         List<TEntity> GetAll();
         TEntity GetById(object id);
-        void AddOrEdit(TEntity obj);
+        void Insert(TEntity obj);
+        void Update(TEntity obj);
         void Delete(object id);
         void Save();
     }
