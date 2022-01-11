@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace UserMicroService.Repositories.Interfaces
 {
-    public interface IUserRepository : IGenericCrud<User>
+    public interface IUserRepository<TEntity> : IGenericCrud<TEntity> where TEntity: class
     {
 
     }

@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using SharedModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,7 +34,7 @@ namespace UserMicroService
             string conn = Configuration.GetConnectionString("conn");
             services.AddDbContext<UserDbContext>(options => options.UseSqlServer(conn));
 
-            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserRepository<User>, UserRepository<User>>();
 
 
             services.AddControllers();
